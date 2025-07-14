@@ -18,6 +18,25 @@ class Solution:
                 jumps += 1
         return ''.join(result)
 
+    def convert2(self, s: str, numRows: int) -> str:
+        if numRows == 1 or numRows >= len(s):
+            return s
+
+        current_row = 0
+        direction = 1
+
+        result = [[] for _ in range(numRows)]
+
+        for character in s:
+            result[current_row].append(character)
+            if current_row == 0:
+                direction = 1
+            elif current_row == numRows - 1:
+                direction = -1
+            current_row += direction
+
+        return ''.join([''.join(row) for row in result])
+
 
 assert Solution().convert(s="PAYPALISHIRING", numRows=3) == "PAHNAPLSIIGYIR"
 assert Solution().convert(s="PAYPALISHIRING", numRows=4) == "PINALSIGYAHRPI"
